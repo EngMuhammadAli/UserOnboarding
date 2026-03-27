@@ -6,8 +6,8 @@ namespace UserOnboarding.Application.Interfaces
 {
     public interface IAuthService
     {
-        Task SendOtpAsync(string mobile);
-        Task<bool> VerifyOtpAsync(string mobile, string otp);
-        Task SetPinAsync(string mobile, string pin);
+        Task SendOtpAsync(string mobileNumber);
+        Task<bool> VerifyOtpAsync(string mobileNumber, string otp);
+        Task SetPinAsync(string mobileNumber, string pin);
     }
 }

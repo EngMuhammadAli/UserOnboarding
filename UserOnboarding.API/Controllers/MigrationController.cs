@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using UserOnboarding.Application.Interfaces;
+using UserOnboarding.Application.Interfaces.UserOnboarding.Application.Interfaces;
 using UserOnboarding.Application.Services;
 
 namespace UserOnboarding.API.Controllers

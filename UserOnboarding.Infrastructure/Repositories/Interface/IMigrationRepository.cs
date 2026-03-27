@@ -5,9 +5,10 @@ using UserOnboarding.Domain.Entities;
 
 namespace UserOnboarding.Infrastructure.Repositories
 {
-    public interface IOtpRepository
+    public interface IMigrationRepository
     {
-        OtpVerification GenerateOtp(string phone);
-        bool VerifyOtp(string phone, string otp);
+        Task<User> GetUserByMobileAsync(string mobileNumber);
+        Task UpdateUserAsync(User user);
+        Task SaveChangesAsync();
     }
 }

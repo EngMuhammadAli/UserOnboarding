@@ -5,12 +5,12 @@ using UserOnboarding.Domain.Entities;
 
 namespace UserOnboarding.Application.Interfaces
 {
-    public interface IMigrationService
+    namespace UserOnboarding.Application.Interfaces
     {
-        MigrationSession Start(int oldCustomerId);
-        OtpVerification SendOtp(string phone);
-        bool VerifyOtp(string phone, string otp);
-        void SetPassword(int migrationId, string newPassword);
-        MigrationSession? GetStatus(int migrationId);
+        public interface IMigrationService
+        {
+            Task<bool> Validate(string mobileNumber, string cnic);
+            Task CompleteMigration(string mobileNumber);
+        }
     }
 }

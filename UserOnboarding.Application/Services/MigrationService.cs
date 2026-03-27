@@ -2,42 +2,47 @@
 using System.Collections.Generic;
 using System.Text;
 using UserOnboarding.Application.Interfaces;
+using UserOnboarding.Application.Interfaces.UserOnboarding.Application.Interfaces;
 using UserOnboarding.Domain.Entities;
+using UserOnboarding.Infrastructure.Data;
+using UserOnboarding.Infrastructure.Repositories;
 
 namespace UserOnboarding.Application.Services
 {
     public class MigrationService : IMigrationService
     {
-        private readonly AppDbContext _context;
-        private readonly IOtpRepository _otpRepo;
+        private readonly IMigrationRepository _repository;
 
-        public MigrationService(AppDbContext context, IOtpRepository otpRepo)
+        public MigrationService(IMigrationRepository repository)
         {
-            _context = context;
-            _otpRepo = otpRepo;
+            _repository = repository;
         }
 
-        public MigrationSession Start(int oldCustomerId)
+        public async Task<bool> Validate(string mobileNumber, string cnic)
         {
-            var migration = new MigrationSession { OldCustomerId = oldCustomerId };
-            _context.MigrationSessions.Add(migration);
-            _context.SaveChanges();
-            return migration;
+            var user = await _repository.GetUserByMobileAsync(mobileNumber);
+
+            if (user == null)
+                return false;
+
+            // TODO: Replace with real CNIC validation logic
+            bool isValid = !string.IsNullOrEmpty(cnic);
+
+            return isValid;
         }
 
-        public OtpVerification SendOtp(string phone) => _otpRepo.GenerateOtp(phone);
-
-        public bool VerifyOtp(string phone, string otp) => _otpRepo.VerifyOtp(phone, otp);
-
-        public void SetPassword(int migrationId, string newPassword)
+        public async Task CompleteMigration(string mobileNumber)
         {
-            var migration = _context.MigrationSessions.Find(migrationId);
-            if (migration == null) throw new Exception("Migration not found");
-            migration.PasswordUpdated = true;
-            _context.SaveChanges();
-        }
+            var user = await _repository.GetUserByMobileAsync(mobileNumber);
 
-        public MigrationSession? GetStatus(int migrationId) => _context.MigrationSessions.Find(migrationId);
+            if (user == null)
+                throw new Exception("User not found");
+
+            user.IsMigrated = true;
+
+            await _repository.UpdateUserAsync(user);
+            await _repository.SaveChangesAsync();
+        }
     }
 
 }

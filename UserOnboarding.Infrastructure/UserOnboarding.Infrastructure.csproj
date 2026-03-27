@@ -7,12 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\UserOnboarding.Application\UserOnboarding.Application.csproj" />
     <ProjectReference Include="..\UserOnboarding.Domain\UserOnboarding.Domain.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Data\" />
     <Folder Include="Services\" />
   </ItemGroup>
 

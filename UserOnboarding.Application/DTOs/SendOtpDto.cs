@@ -27,4 +27,19 @@ namespace UserOnboarding.Application.DTOs
         public string MobileNumber { get; set; }
         public string Pin { get; set; }
     }
+    public class MigrationValidateDto
+    {
+        public string MobileNumber { get; set; }
+        public string CNIC { get; set; }
+    }
+    public class OtpRequestDto
+    {
+        public string MobileNumber { get; set; }
+    }
+    public class OtpVerifyDto
+    {
+        public string MobileNumber { get; set; }
+        public string Code { get; set; }
+    }
+   
 }

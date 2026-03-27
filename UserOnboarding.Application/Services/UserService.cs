@@ -4,21 +4,22 @@ using System.Text;
 using UserOnboarding.Application.DTOs;
 using UserOnboarding.Application.Interfaces;
 using UserOnboarding.Domain.Entities;
+using UserOnboarding.Infrastructure.Repositories;
 
 namespace UserOnboarding.Application.Services
 {
     public class UserService : IUserService
     {
-        private readonly AppDbContext _context;
+        private readonly IUserRepository _customerRepository;
 
-        public UserService(AppDbContext context)
+        public UserService(IUserRepository customerRepository)
         {
-            _context = context;
+            _customerRepository = customerRepository;
         }
 
         public async Task<bool> Exists(string mobile)
         {
-            return await _context.Users.AnyAsync(x => x.MobileNumber == mobile);
+            return await _customerRepository.Exists(mobile);
         }
 
         public async Task Register(RegisterDto dto)
@@ -31,15 +32,12 @@ namespace UserOnboarding.Application.Services
                 IsActive = false
             };
 
-            _context.Users.Add(user);
-            await _context.SaveChangesAsync();
+            _customerRepository.Add(user);
         }
 
         public async Task Activate(string mobile)
         {
-            var user = await _context.Users.FirstAsync(x => x.MobileNumber == mobile);
-            user.IsActive = true;
-            await _context.SaveChangesAsync();
+            await _customerRepository.Activate(mobile);
         }
     }
 }
