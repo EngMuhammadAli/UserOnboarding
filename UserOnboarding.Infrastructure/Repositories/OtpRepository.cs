@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using UserOnboarding.Domain.Entities;
 using UserOnboarding.Infrastructure.Data;
+using UserOnboarding.Application.Interfaces;
 
 namespace UserOnboarding.Infrastructure.Repositories
 {

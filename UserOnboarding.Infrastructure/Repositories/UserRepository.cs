@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using UserOnboarding.Application.Interfaces;
 using UserOnboarding.Domain.Entities;
 using UserOnboarding.Infrastructure.Data;
 
