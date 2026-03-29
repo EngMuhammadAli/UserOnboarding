@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using UserOnboarding.Application.Interfaces;
-using UserOnboarding.Application.Interfaces.UserOnboarding.Application.Interfaces;
-using UserOnboarding.Domain.Entities;
-using UserOnboarding.Infrastructure.Data;
+﻿using UserOnboarding.Application.Interfaces.UserOnboarding.Application.Interfaces;
 using UserOnboarding.Infrastructure.Repositories;
 
 namespace UserOnboarding.Application.Services

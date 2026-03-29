@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using UserOnboarding.Application.DTOs;
+﻿using UserOnboarding.Application.DTOs;
 using UserOnboarding.Application.Interfaces;
 using UserOnboarding.Domain.Entities;
-using UserOnboarding.Infrastructure.Repositories;
 
 namespace UserOnboarding.Application.Services
 {
@@ -39,5 +35,7 @@ namespace UserOnboarding.Application.Services
         {
             await _customerRepository.Activate(mobile);
         }
+
+      
     }
 }

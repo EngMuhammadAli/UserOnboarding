@@ -12,7 +12,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\UserOnboarding.Domain\UserOnboarding.Domain.csproj" />
-    <ProjectReference Include="..\UserOnboarding.Infrastructure\UserOnboarding.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
